@@ -360,7 +360,10 @@ try:
             for ecudid in jobs:
                 ensure_ecu(ecudid[0])
                 if(len(dicEcus) > 1): mlvl |= 4  # show ecu addr
-                readbydid(addr=ecudid[0], did=ecudid[1], raw=args.raw, msglvl=mlvl)
+                try:
+                    readbydid(addr=ecudid[0], did=ecudid[1], raw=args.raw, msglvl=mlvl)
+                except:
+                    print("an exception during read occurred")
                 time.sleep(0.02)
             if(args.timestep != None):
                 time.sleep(float(eval(args.timestep)))
